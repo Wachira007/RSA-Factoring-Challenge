@@ -6,30 +6,19 @@ like factoring in RSA factorization."""
 from sys import argv
 
 
-def factorize(value):
-    """"print a simple descomposition of an integer > 1"""
-    i = 2
+if len(sys.argv) != 2:
+    print("Bad Usage\n/.factors filename")
+else:
 
-    if value < 2:
-        return
-    print()
-    print(value, "<- value-bef")
-    while value % i:
-        i += 1
-    print("{:.0f}={:.0f}*{:.0f}".format(value, value / i, i))
-    print(value, "<- value-aft")
-    print()
+    file_name = sys.argv[1]
+    file_of_number = open(file_name)
+    number = file_of_number.readline()
 
-if len(argv) != 2:
-    exit()
-
-try:
-    with open(argv[1]) as file:
-        line = file.readline()
-
-        while line != "":
-            value = int(line.split('\n')[0])
-            factorize(value)
-            line = file.readline()
-except:
-    pass
+    while number != "\n" and number != "":
+        number = int(number)
+        divisor = 2
+        while number % divisor != 0:
+            divisor += 1
+        d_r = int(number / divisor)
+        print(f"{number}={d_r}*{divisor}")
+        number = file_of_number.readline()
